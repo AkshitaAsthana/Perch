@@ -1,0 +1,8 @@
+{
+  "name": "Perch LA - Elevated Rooftop Dining",
+  "description": "A luxury rooftop restaurant website featuring French-inspired cuisine, panoramic DTLA views, and a Gemini-powered digital concierge.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
