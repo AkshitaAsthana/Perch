@@ -2,11 +2,22 @@
 import { GoogleGenAI } from "@google/genai";
 import { RESTAURANT_INFO, MENU_ITEMS } from "../constants";
 
-const getApiKey = () => process.env.API_KEY || "";
+const getApiKey = () => {
+  try {
+    return process.env.API_KEY || "";
+  } catch (e) {
+    return "";
+  }
+};
 
 export const getConciergeResponse = async (query: string) => {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    return "Bonjour! I'm currently in a quiet mode as my API key is being configured. Please feel free to check our menu or call our host stand at (213) 802-1770.";
+  }
+
   try {
-    const ai = new GoogleGenAI({ apiKey: getApiKey() });
+    const ai = new GoogleGenAI({ apiKey });
     const menuSummary = MENU_ITEMS.map(item => `${item.name}: ${item.description} ($${item.price})`).join('\n');
     
     const systemInstruction = `
