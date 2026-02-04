@@ -4,7 +4,8 @@ import { RESTAURANT_INFO, MENU_ITEMS } from "../constants";
 
 const getApiKey = () => {
   try {
-    return process.env.API_KEY || "";
+    // Check both standard process.env and our window-level shim
+    return (process?.env?.API_KEY) || (window as any).process?.env?.API_KEY || "";
   } catch (e) {
     return "";
   }

@@ -8,11 +8,8 @@
     
     <!-- Process Shim for Gemini SDK -->
     <script>
-        window.process = {
-            env: {
-                API_KEY: "" // Will be populated by the environment
-            }
-        };
+        window.process = window.process || { env: {} };
+        window.process.env = window.process.env || {};
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -101,7 +98,7 @@
 </head>
 <body class="smooth-scroll">
     <div id="root"></div>
-    <!-- Vite entry point -->
-    <script type="module" src="/index.tsx"></script>
+    <!-- Vite entry point: pointing to index.tsx for the build process -->
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>
