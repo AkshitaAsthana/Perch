@@ -1,13 +1,13 @@
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: '/',
   define: {
-    // This ensures that the Gemini SDK can access process.env without crashing the browser
-    'process.env': {}
+    // Provide a more stable global shim for process.env
+    'process.env': '({})',
+    'process.versions': '({})',
   },
   build: {
     outDir: 'dist',

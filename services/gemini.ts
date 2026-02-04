@@ -1,11 +1,14 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { RESTAURANT_INFO, MENU_ITEMS } from "../constants";
 
 const getApiKey = () => {
   try {
-    // Check both standard process.env and our window-level shim
-    return (process?.env?.API_KEY) || (window as any).process?.env?.API_KEY || "";
+    // Look for API_KEY in various possible global locations
+    return (
+      (typeof process !== 'undefined' && process.env?.API_KEY) || 
+      (window as any).process?.env?.API_KEY || 
+      ""
+    );
   } catch (e) {
     return "";
   }
@@ -14,7 +17,7 @@ const getApiKey = () => {
 export const getConciergeResponse = async (query: string) => {
   const apiKey = getApiKey();
   if (!apiKey) {
-    return "Bonjour! I'm currently in a quiet mode as my API key is being configured. Please feel free to check our menu or call our host stand at (213) 802-1770.";
+    return "Bonjour! I'm currently in a quiet mode as my connection is being established. Please check our menu or call our host stand at (213) 802-1770.";
   }
 
   try {
